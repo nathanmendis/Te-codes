@@ -5,21 +5,20 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import mean_squared_error, accuracy_score
 from sklearn.preprocessing import LabelEncoder
 
-# Load dataset
+
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/abalone/abalone.data"
 columns = ['Sex', 'Length', 'Diameter', 'Height', 'WholeWeight', 'ShuckedWeight', 'VisceraWeight', 'ShellWeight', 'Rings']
 df = pd.read_csv(url, names=columns)
 
-# Encode 'Sex' feature
+
 le = LabelEncoder()
 df['Sex'] = le.fit_transform(df['Sex'])
 
-# Add 'Age' column
 df['Age'] = df['Rings'] + 1.5
 
-# ----------------------
+
 # Task A: Classification (Young (<=10 rings) vs Old (>10 rings))
-# ----------------------
+
 df['AgeGroup'] = df['Rings'].apply(lambda x: 1 if x > 10 else 0)  # 1 = old, 0 = young
 X = df.drop(['Rings', 'Age', 'AgeGroup'], axis=1)
 y_class = df['AgeGroup']

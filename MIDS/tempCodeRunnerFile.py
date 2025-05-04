@@ -1,2 +1,1 @@
-
-print(titanic_data.head())
+values
